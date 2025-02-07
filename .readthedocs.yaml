@@ -13,8 +13,8 @@ python:
     - requirements: docs/requirements.txt
     - method: pip
       path: .
-      extra_requirements:
-        - docsbuild
+      # extra_requirements:
+      #   - docsbuild
 submodules:
     include: [docs/source/Tutorials]
     recursive: true
