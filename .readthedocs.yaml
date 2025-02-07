@@ -16,5 +16,5 @@ python:
       extra_requirements:
         - docsbuild
 submodules:
-    include: [docs/source/tutorial]
+    include: [docs/source/Tutorials]
     recursive: true
