@@ -12,9 +12,9 @@ python:
   install:
     - requirements: docs/requirements.txt
     - method: pip
-      # path: .
-      # extra_requirements:
-      #   - docsbuild
+      path: .
+      extra_requirements:
+        - docsbuild
 submodules:
     include: [docs/source/Tutorials]
     recursive: true
