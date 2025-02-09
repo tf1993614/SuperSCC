@@ -14,7 +14,7 @@ import os
 import sys
 # sys.path.insert(0, os.path.abspath('.'))
 os.environ['PATH'] = '/home/fengtang/anaconda3/envs/SuperSCC/lib/python3.11/site-packages/pandoc:' + os.environ['PATH']
-sys.path.insert(0, os.path.abspath("../jupyter_notebooks/working_script/SuperSCC/SuperSCC/"))
+sys.path.insert(0, os.path.abspath("../SuperSCC/"))
 sys.path.insert(0, os.path.abspath("_ext"))
 
 import SuperSCC # noqa: E402
