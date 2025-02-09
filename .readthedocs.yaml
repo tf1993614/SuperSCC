@@ -6,9 +6,7 @@ build:
     python: "3.9"
 environment:
   R_HOME: "/usr/lib/R"
-before_install:
-  - sudo apt-get update
-  - sudo apt-get install -y r-base r-base-dev
+  RPY2_CFFI_MODE: "ABI"
 sphinx:
   configuration: docs/source/conf.py
   # disable this for more lenient docs builds
