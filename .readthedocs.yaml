@@ -8,6 +8,13 @@ sphinx:
   configuration: docs/source/conf.py
   # disable this for more lenient docs builds
   fail_on_warning: false
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y r-base r-base-dev
+  - export R_HOME="/usr/lib/R"
+  - export RPY2_CFFI_MODE="ABI"
+  - echo $R_HOME  # 打印 R_HOME 环境变量
+  - echo $RPY2_CFFI_MODE  # 打印 RPY2_CFFI_MODE 环境变量
 python:
   install:
     - requirements: docs/requirements.txt
