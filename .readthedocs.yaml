@@ -4,12 +4,13 @@ build:
   os: ubuntu-20.04
   tools:
     python: "3.9"
-  jobs:
-    pre_install:
-     # - apt-get update && apt-get install -y r-base
-     # - sudo apt-get install -y r-base r-base-dev
-     # - export R_HOME="/usr/lib/R"
-      - export RPY2_CFFI_MODE="ABI"
+  apt_packages:
+    - r-base         # 安装 R 语言环境
+    - r-base-dev 
+  environment:
+    RPY2_CFFI_MODE: "ABI"
+  commands:
+    - export R_HOME=$(R RHOME)
 sphinx:
   configuration: docs/source/conf.py
   # disable this for more lenient docs builds
