@@ -17,6 +17,7 @@ build:
       html:
         - echo "Building HTML"
         - mkdir -p $READTHEDOCS_OUTPUT/html/
+        - echo "Hello world!" > $READTHEDOCS_OUTPUT/html/index.html
 sphinx:
   configuration: docs/source/conf.py
   # disable this for more lenient docs builds
