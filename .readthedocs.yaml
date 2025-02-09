@@ -6,9 +6,9 @@ build:
     python: "3.9"
   jobs:
     pre_install:
-      - apt-get update && apt-get install -y r-base
-     #  - sudo apt-get install -y r-base r-base-dev
-      - export R_HOME="/usr/lib/R"
+     # - apt-get update && apt-get install -y r-base
+     # - sudo apt-get install -y r-base r-base-dev
+     # - export R_HOME="/usr/lib/R"
       - export RPY2_CFFI_MODE="ABI"
 sphinx:
   configuration: docs/source/conf.py
