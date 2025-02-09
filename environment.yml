@@ -1,0 +1,11 @@
+name: my-docs-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - r-base
+  - rpy2
+  - pip
+  - pip:
+    - -r docs/requirements.txt
