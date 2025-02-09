@@ -10,6 +10,18 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
+import sys
+
+# Mock rpy2
+class MockModule:
+    def __getattr__(self, name):
+        return None
+
+sys.modules['rpy2'] = MockModule()
+sys.modules['rpy2.robjects'] = MockModule()
+sys.modules['rpy2.robjects.packages'] = MockModule()
+
+
 import os
 import sys
 # sys.path.insert(0, os.path.abspath('.'))
