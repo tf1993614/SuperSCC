@@ -7,8 +7,8 @@ build:
   apt_packages:
     - r-base         # 安装 R 语言环境
     - r-base-dev 
-  environment:
-    RPY2_CFFI_MODE: "ABI"
+ # environment:
+ #  RPY2_CFFI_MODE: "ABI"
   commands:
     - export R_HOME=$(R RHOME)
 sphinx:
