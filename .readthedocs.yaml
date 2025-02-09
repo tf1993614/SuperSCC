@@ -4,6 +4,11 @@ build:
   os: ubuntu-20.04
   tools:
     python: "3.9"
+environment:
+  R_HOME: "/usr/lib/R"
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y r-base r-base-dev
 sphinx:
   configuration: docs/source/conf.py
   # disable this for more lenient docs builds
