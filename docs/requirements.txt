@@ -5,3 +5,4 @@ sphinx_design>=0.6.1
 sphinxext-opengraph>=0.9.1
 nbsphinx>=0.8
 ipython>=8.18.1
+numpy==1.23.5
