@@ -29,6 +29,8 @@ os.environ['PATH'] = '/home/fengtang/anaconda3/envs/SuperSCC/lib/python3.11/site
 sys.path.insert(0, os.path.abspath("../SuperSCC/"))
 sys.path.insert(0, os.path.abspath("_ext"))
 
+os.environ['RPY2_CFFI_MODE'] = 'ABI'
+
 import SuperSCC # noqa: E402
 
 # -- Project information -----------------------------------------------------
