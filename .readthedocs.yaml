@@ -13,6 +13,10 @@ build:
     # - export R_HOME=$(R RHOME)
     # - mkdir -p $READTHEDOCS_OUTPUT/html/
     - export RPY2_CFFI_MODE="ABI"
+  build:
+      html:
+        - echo "Building HTML"
+        - mkdir -p $READTHEDOCS_OUTPUT/html/
 sphinx:
   configuration: docs/source/conf.py
   # disable this for more lenient docs builds
