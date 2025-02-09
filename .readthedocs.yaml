@@ -18,7 +18,3 @@ python:
 submodules:
     include: [docs/source/Tutorials]
     recursive: true
-build_commands:
-  - apt-get update && apt-get install -y r-base  # 安装 R
-  - export R_HOME=/usr/lib/R                     # 设置 R_HOME
-  - export PATH=$PATH:/usr/lib/R/bin    
