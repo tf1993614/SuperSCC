@@ -28,6 +28,6 @@ setup(
     ],
     python_requires=">=3.7",
     install_requires=[
-        "dcor", "scanpy", "pandas", "numpy", "scipy", "scikit-learn==1.2.2", "igraph", "leidenalg", "plotly", "rpy2"
+        "dcor", "scanpy", "pandas", "numpy==1.23.5", "scipy", "scikit-learn==1.2.2", "igraph", "leidenalg", "plotly", "rpy2"
     ]
 )
