@@ -5,7 +5,7 @@ API
 
 Import SuperSCC as::
         
-        from SuperSCC import *
+        import SuperSCC as scc
 
 Feature selection
 ~~~~~~~~~~~~~~~~~~
@@ -14,9 +14,9 @@ Feature selection
 .. autosummary::
   :toctree: generated
 
-  SuperSCC.feature_selection
-  SuperSCC.find_signature_genes
-  SuperSCC.find_markers_ovr
+  scc.feature_selection
+  scc.find_signature_genes
+  scc.find_markers_ovr
 
 Clustering
 ~~~~~~~~~~~~~~~~~~
@@ -25,8 +25,8 @@ Clustering
 .. autosummary::
    :toctree: generated
 
-   global_consensus_cluster
-   sub_consensus_cluster
+   scc.global_consensus_cluster
+   scc.sub_consensus_cluster
 
 Label transfer
 ~~~~~~~~~~~~~~~~~
@@ -35,8 +35,8 @@ Label transfer
 .. autosummary::
    :toctree: generated
 
-   model_training
-   predict_label
+   scc.model_training
+   scc.predict_label
 
 Gene module
 ~~~~~~~~~~~~~~~~~
@@ -45,7 +45,9 @@ Gene module
 .. autosummary::
    :toctree: generated
 
-   get_gene_module
+   scc.get_gene_module
+   scc.compare_gene_modules
+   scc.canalyse_one_gene_module
    
  
 
