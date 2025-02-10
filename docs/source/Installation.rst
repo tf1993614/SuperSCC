@@ -18,7 +18,7 @@ To install SuperSCC via GitHub, you can do::
         cd SuperSCC
         python setup.py install
 
-Since the `get_gene_module` function was written in R, you also need install **geneModule** R package::
+Since the `get_gene_module` function was written in R, you also need install `**geneModule** <https://github.com/tf1993614/SuperSCC/blob/main/geneModule/geneModule_0.0.0.9000.tar.gz>`_ R package::
 
         R
         install.packages("geneModule_0.1.tar.gz", repos = .libPaths()[1], type = "source")
