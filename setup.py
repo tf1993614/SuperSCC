@@ -28,6 +28,17 @@ setup(
     ],
     python_requires=">=3.7",
     install_requires=[
-        "dcor", "scanpy", "pandas", "numpy==1.23.5", "scipy", "scikit-learn==1.2.2", "igraph", "leidenalg", "plotly", "rpy2"
+       "dcor==0.6", 
+       "scanpy==1.10.1", 
+       "pandas==2.2.2", 
+       "numpy==1.26.4", 
+       "scipy==1.13.0", 
+       "scikit-learn==1.2.2", 
+       "igraph==0.11.4", 
+       "leidenalg==0.10.2", 
+       "plotly==5.22.0", 
+       "rpy2==3.5.17", 
+       "langchain"，
+       "langchain-community"
     ]
 )
