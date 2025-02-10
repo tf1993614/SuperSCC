@@ -38,7 +38,7 @@ setup(
        "leidenalg==0.10.2", 
        "plotly==5.22.0", 
        "rpy2==3.5.17", 
-       "langchain"，
+       "langchain",
        "langchain-community"
     ]
 )
