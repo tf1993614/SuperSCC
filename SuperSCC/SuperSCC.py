@@ -13,6 +13,9 @@ from multiprocessing import Process
 from collections import Counter
 import copy
 
+from langchain_community.chat_models import ChatOpenAI
+from langchain.prompts import ChatPromptTemplate
+from langchain.schema import StrOutputParser
 import plotly.graph_objects as go
 from rpy2.robjects.packages import importr
 from rpy2.robjects import pandas2ri
@@ -2743,5 +2746,114 @@ def get_gene_module(data, intersect_size = 10, intersect_group_size = 5, paralle
     res = geneModule.get_gene_module(data = r_df, intersect_size = intersect_size, intersect_group_size = intersect_group_size, parallel_num = parallel_num)
     res = dict(zip(res.names, map(lambda x: x[0] if len(x) == 1 else x, res)))
     return res
+
+# %%
+def compare_gene_modules(module1, module2, api_key):
+    """
+    Compare two gene modules and analyze their similarities and differences.
+    
+    Parameters
+    ----------
+    module1:
+        A gene set list representing the first gene module.
+    module2:
+        A gene set list representing the second gene module.
+    api_key:
+        A sting for the api key of the DeepSeek model.
+    """
+    # Genes are already converted to names
+    module1_genes = module1
+    module2_genes = module2
+
+    # Find common and unique genes
+    common_genes = set(module1_genes).intersection(set(module2_genes))
+    unique_to_module1 = set(module1_genes) - set(module2_genes)
+    unique_to_module2 = set(module2_genes) - set(module1_genes)
+
+    # Create comparison template
+    comparison_template = """You are a bioinformatics expert. Compare these two gene modules:
+    
+    Module 1: {module1_genes}
+    Module 2: {module2_genes}
+    
+    Analyze:
+    1. Common biological pathways between modules
+    2. Unique pathways in each module
+    3. Potential functional relationships between modules
+    4. Disease associations shared between modules
+    5. Tissue/cell type specificity differences
+    
+    Provide your analysis in clear, structured paragraphs."""
+
+    # Create comparison prompt
+    comparison_prompt = ChatPromptTemplate.from_template(comparison_template)
+
+    # set model
+    model = ChatOpenAI(
+        model="deepseek-chat",
+        temperature=0.7,
+        openai_api_key=api_key,
+        openai_api_base="https://api.deepseek.com/v1"
+    )
+
+    # Run comparison analysis
+    comparison_chain = comparison_prompt | model | StrOutputParser()
+    comparison_result = comparison_chain.invoke(
+        {
+            "module1_genes": ", ".join(module1_genes),
+            "module2_genes": ", ".join(module2_genes),
+        }
+    )
+
+    return {
+        "common_genes": list(common_genes),
+        "unique_to_module1": list(unique_to_module1),
+        "unique_to_module2": list(unique_to_module2),
+        "comparison_analysis": comparison_result,
+    }
+
+#%%
+def canalyse_one_gene_module(module_genes, api_key):
+    """
+    Analyze a single gene module using the DeepSeek model
+    
+    Parameters
+    ----------
+    module_genes:
+        A gene set list representing the gene module.
+    api_key:
+        A sting for the api key of the DeepSeek model.
+    """
+    # Convert gene IDs to names
+    gene_names = module_genes
+
+    # Create prompt template
+    template = """You are a bioinformatics expert. Analyze this list of genes and provide a detailed functional interpretation of the gene module:
+    {genes}
+    
+    Consider:
+    1. Common biological pathways
+    2. Cellular processes involved
+    3. Potential tissue/cell type specificity
+    4. Disease associations
+    5. Functional relationships between genes
+    
+    Provide your analysis in clear, structured paragraphs."""
+    prompt = ChatPromptTemplate.from_template(template)
+
+    # set model
+    model = ChatOpenAI(
+        model="deepseek-chat",
+        temperature=0.7,
+        openai_api_key=api_key,
+        openai_api_base="https://api.deepseek.com/v1"
+    )
+
+    chain = prompt | model | StrOutputParser()
+
+    # Run analysis for gene module
+    analysis = chain.invoke({"genes": ", ".join(gene_names)})
+
+    return analysis
 
 
