@@ -14,9 +14,9 @@ Feature selection
 .. autosummary::
   :toctree: generated
 
-  scc.feature_selection
-  scc.find_signature_genes
-  scc.find_markers_ovr
+  SuperSCC.feature_selection
+  SuperSCC.find_signature_genes
+  SuperSCC.find_markers_ovr
 
 Clustering
 ~~~~~~~~~~~~~~~~~~
@@ -25,8 +25,8 @@ Clustering
 .. autosummary::
    :toctree: generated
 
-   scc.global_consensus_cluster
-   scc.sub_consensus_cluster
+   SuperSCC.global_consensus_cluster
+   SuperSCC.sub_consensus_cluster
 
 Label transfer
 ~~~~~~~~~~~~~~~~~
@@ -35,8 +35,8 @@ Label transfer
 .. autosummary::
    :toctree: generated
 
-   scc.model_training
-   scc.predict_label
+   SuperSCC.model_training
+   SuperSCC.predict_label
 
 Gene module
 ~~~~~~~~~~~~~~~~~
@@ -45,9 +45,9 @@ Gene module
 .. autosummary::
    :toctree: generated
 
-   scc.get_gene_module
-   scc.compare_gene_modules
-   scc.canalyse_one_gene_module
+   SuperSCC.get_gene_module
+   SuperSCC.compare_gene_modules
+   SuperSCC.canalyse_one_gene_module
    
  
 
