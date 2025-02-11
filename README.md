@@ -6,7 +6,7 @@ SuperSCC (Super single cell clustering), a novel algorithm that utilizes machine
 
 ## Installation
 
-To install SuperSCC, you should run the following code if you already get `SuperSCC's tar ball <https://github.com/tf1993614/SuperSCC/tree/main/dist>`_::
+To install SuperSCC, you should run the following code if you already get [SuperSCC's tar ball](https://github.com/tf1993614/SuperSCC/tree/main/dist)
 
         pip install SuperSCC.tar.gz
 
@@ -18,7 +18,7 @@ To install SuperSCC via GitHub, you can do::
         cd SuperSCC
         python setup.py install
 
-Since the `get_gene_module` function was written in R, you also need install `geneModule <https://github.com/tf1993614/SuperSCC/tree/main/geneModule>`_ R package::
+Since the `get_gene_module` function was written in R, you also need install [geneModule](https://github.com/tf1993614/SuperSCC/tree/main/geneModule)
 
         R
         install.packages("geneModule_0.1.tar.gz", repos = .libPaths()[1], type = "source")
@@ -33,6 +33,6 @@ After installing correctly, you can load SuperSCC::
 
 ## Documentation
 
-For how to use SuperSCC, please read the `SuperSCC documentation <https://superscc.readthedocs.io/en/latest/index.html>`_.
+For how to use SuperSCC, please read the [SuperSCC documentation](https://superscc.readthedocs.io/en/latest/index.html).
 
 ## Citation
