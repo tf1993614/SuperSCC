@@ -14,7 +14,7 @@ Usually, all dependencies should be downloaded and installed automatically.
 
 To install SuperSCC via GitHub, you can do::
 
-        git clone 
+        git clone https://github.com/tf1993614/SuperSCC/
         cd SuperSCC
         python setup.py install
 
