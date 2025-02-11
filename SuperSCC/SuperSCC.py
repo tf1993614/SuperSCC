@@ -2824,12 +2824,9 @@ def analyse_one_gene_module(module_genes, api_key):
     api_key:
         A sting for the api key of the DeepSeek model.
     """
-    # Convert gene IDs to names
-    gene_names = module_genes
-
     # Create prompt template
     template = """You are a bioinformatics expert. Analyze this list of genes and provide a detailed functional interpretation of the gene module:
-    {gene_names}
+    {module_genes}
     
     Consider:
     1. Common biological pathways
@@ -2852,7 +2849,7 @@ def analyse_one_gene_module(module_genes, api_key):
     chain = prompt | model | StrOutputParser()
 
     # Run analysis for gene module
-    analysis = chain.invoke({"genes": ", ".join(gene_names)})
+    analysis = chain.invoke({"genes": ", ".join(module_genes)})
 
     return analysis
 
