@@ -12,6 +12,9 @@ from multiprocessing import Process
 from collections import Counter
 import copy
 
+from langchain_community.chat_models import ChatOpenAI
+from langchain.prompts import ChatPromptTemplate
+from langchain.schema import StrOutputParser
 from rpy2.robjects.packages import importr
 from dcor import distance_correlation
 import scanpy as sc
