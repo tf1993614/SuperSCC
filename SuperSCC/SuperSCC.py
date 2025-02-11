@@ -2829,7 +2829,7 @@ def analyse_one_gene_module(module_genes, api_key):
 
     # Create prompt template
     template = """You are a bioinformatics expert. Analyze this list of genes and provide a detailed functional interpretation of the gene module:
-    {genes}
+    {gene_names}
     
     Consider:
     1. Common biological pathways
