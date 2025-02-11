@@ -2813,7 +2813,7 @@ def compare_gene_modules(module1, module2, api_key):
     }
 
 #%%
-def canalyse_one_gene_module(module_genes, api_key):
+def analyse_one_gene_module(module_genes, api_key):
     """
     Analyze a single gene module using the DeepSeek model
     
