@@ -47,7 +47,7 @@ Gene module
 
    SuperSCC.get_gene_module
    SuperSCC.compare_gene_modules
-   SuperSCC.canalyse_one_gene_module
+   SuperSCC.analyse_one_gene_module
    
  
 
