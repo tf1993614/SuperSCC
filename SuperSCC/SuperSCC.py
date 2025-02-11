@@ -2849,7 +2849,7 @@ def analyse_one_gene_module(module_genes, api_key):
     chain = prompt | model | StrOutputParser()
 
     # Run analysis for gene module
-    analysis = chain.invoke({"genes": ", ".join(module_genes)})
+    analysis = chain.invoke({"module_genes": ", ".join(module_genes)})
 
     return analysis
 
