@@ -6,7 +6,7 @@ We encourage to create a new virtual environment before installing SuperSCC::
         conda create -n superscc_env
         conda activate superscc_env
 
-To install SuperSCC, you should run the following code if you already get SuperSCC's tar ball::
+To install SuperSCC, you should run the following code if you already get `SuperSCC's tar ball <https://github.com/tf1993614/SuperSCC/tree/main/dist>`_::
 
         pip install SuperSCC.tar.gz
 
