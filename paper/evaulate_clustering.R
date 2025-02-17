@@ -23,6 +23,21 @@ rename_files[16, 2] = "Braga_2021_B"
 
 # only focus level 2 and compare different methods
 # seurat resolution is 0.8
+new_names = names[str_detect(names, "lv2")]
+scores1 = scores[str_detect(names(scores), "lv2")]
+
+scores1 = map(names(scores1), ~ scores1[[.x]] %>% 
+               mutate(score = str_to_upper(str_extract(.x, "ami|nmi|fmi|ari")),
+                      resolution = str_extract(.x, "\\d+.\\d|\\d+")))
+
+scores1 = bind_rows(scores1)
+
+# rename dataset name
+scores1 = scores1 %>% left_join(
+  rename_files %>% dplyr::select(old, Dataset),
+  by = join_by(variable == old)
+)
+
 scores2 = scores1 %>% subset(resolution == 0.8) %>%
   group_by(Dataset, score) %>%
   dplyr::arrange(value, .by_group = TRUE) %>%
