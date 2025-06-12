@@ -38,6 +38,7 @@ from sklearn.feature_selection import RFECV,VarianceThreshold,SelectKBest,chi2, 
 from sklearn.model_selection import cross_val_score, GridSearchCV, train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder, MinMaxScaler
 import matplotlib.pyplot as plt
+import magic
 
 # %%
 def list_files(path, pattern, recursive = True, full_name = True):
@@ -1020,6 +1021,7 @@ def model_training(data,
                    normalization_method = "Min-Max",
                    feature_selection_params = None,
                    parameters = None,
+                   probability = False,
                    random_state = 10,
                    cv = 5,
                    n_jobs = -1,
@@ -1044,6 +1046,8 @@ def model_training(data,
         A string to decide how to normalize data. Default is "Min-Max". Other available words including "Standardization". If features are returned by feature_selection function, this parameter should be consistent with the counterpart used for running feature_selection function.
     parameters: 
         A dict to elucidate the parameter name and value pair that should be searched in the grid search algorithm for corresponding model. Default is None.
+    probability:
+        A Bool value to decide whether the logits should be return when the model is "svm". Default is False. 
     random_state: 
         A int to control the randomness of the bootstrapping of the samples. It takes effect when model is set in 'random_foreast' or in "logistic". Default is 10.
     cv: 
@@ -1193,7 +1197,7 @@ def model_training(data,
             if logger != None:
                 logger.write("critical", "{}: {}".format(key, value))
         
-        SVM_ = SVC(decision_function_shape = "ovr")
+        SVM_ = SVC(decision_function_shape = "ovr", probability = probability)
         GS = GridSearchCV(SVM_, parameters, cv = cv, n_jobs = n_jobs)
         GS.fit(X, y_trans)
         best_parameters = GS.best_params_
@@ -1234,6 +1238,8 @@ def predict_label(query_data,
                   models, 
                   wk_dir = os.getcwd(), 
                   normalization_method = "Min-Max",
+                  magic_based_imputation = False,
+                  pred_confidence_cutoff = None, 
                   filname = None,
                   save = True,
                   logger = None
@@ -1251,6 +1257,10 @@ def predict_label(query_data,
         A string to specify the directory where pre-trained model files should be searched.
     normalization_method: 
         A string to decide how to normalize query data. Default is "Min-Max". Other available words including "Standardization". This parameter should be same as the one when running the model training, thereby guaranteeing same normalization on query and reference. 
+    magic_based_imputation:
+        A Bool value to decide whether MAGIC-based imputation should be employed. When False, the reference features lost in the query would be padded with 0. Default is False. 
+    pred_confidence_cutoff:
+        A float to decide the prediction accuracy cutoff. If the prediction score is lower than the cut off, the predicted cell label will return 'uncertain'. Default is None. This argument  
     filename: 
         A string decide the name of output. Default is None. 
     save: 
@@ -1304,9 +1314,15 @@ def predict_label(query_data,
             if logger != None:
                 logger.write("info", message)
 
-            for lost in without_features:
-                query_data.loc[:, lost] = 0
-        
+
+            if magic_based_imputation:
+                magic_operator = magic.MAGIC()
+                X_magic = magic_operator.fit_transform(query_data, genes = list(without_features))
+                query_data = pd.concat([query_data, X_magic], axis = 1)
+            else:
+                for lost in without_features:
+                    query_data.loc[:, lost] = 0
+                    
         # reorder columns to make sure
         # the order of features being consistent with model
         query_data = query_data.loc[:, list(selected_features)]
@@ -1326,12 +1342,37 @@ def predict_label(query_data,
             prediction = model.predict(query_data)
             try:
                 prediction_prob = model.predict_proba(query_data)
+                if pred_confidence_cutoff != None:
+                    prediction_prob = pd.DataFrame(prediction_prob)
+                    prediction_prob.columns = model_class
+                    pred_score = list()
+                    label = list()
+                    for i in range(prediction_prob.shape[0]):
+                        max_value_index = prediction_prob.iloc[i, :].argmax()
+                        pred_score.append(prediction_prob.iloc[i, :][max_value_index])
+                        label.append(prediction_prob.iloc[i, :].index[max_value_index])
+                    pred_df = pd.DataFrame({"label": label, "pred_score": pred_score}, index = range(len(label)))
+                    for idx, df in pred_df.iterrows():
+                        if df.pred_score < pred_confidence_cutoff:
+                            pred_df.loc[idx, "label"] = "uncertain"
             except:
                 pass
         except:
             prediction = model.predict(np.array(query_data))
             try:
-                prediction_prob = model.predict_proba(np.array(query_data))
+                if pred_confidence_cutoff != None:
+                    prediction_prob = pd.DataFrame(prediction_prob)
+                    prediction_prob.columns = model_class
+                    pred_score = list()
+                    label = list()
+                    for i in range(prediction_prob.shape[0]):
+                        max_value_index = prediction_prob.iloc[i, :].argmax()
+                        pred_score.append(prediction_prob.iloc[i, :][max_value_index])
+                        label.append(prediction_prob.iloc[i, :].index[max_value_index])
+                    pred_df = pd.DataFrame({"label": label, "pred_score": pred_score}, index = range(len(label)))
+                    for idx, df in pred_df.iterrows():
+                        if df.pred_score < pred_confidence_cutoff:
+                            pred_df.loc[idx, "label"] = "uncertain"
             except:
                 pass
         
@@ -1340,6 +1381,9 @@ def predict_label(query_data,
                                           "prediction_prob": prediction_prob}
         except:
             prediction_res[model_name] = {"prediction": [model_class[i] for i in prediction]}
+
+        if pred_confidence_cutoff != None:
+            prediction_res[model_name]["prediction"] = pred_df.label.tolist()
         
         message = "{} finish label prediction based on {}".format(record_time(), model_name)
         print(message)

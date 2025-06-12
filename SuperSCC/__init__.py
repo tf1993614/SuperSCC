@@ -35,6 +35,7 @@ from sklearn.feature_selection import RFECV,VarianceThreshold,SelectKBest,chi2, 
 from sklearn.model_selection import cross_val_score, GridSearchCV, train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder, MinMaxScaler
 import matplotlib.pyplot as plt
+import magic
 
 from .SuperSCC import *
 from ._version import __version__
