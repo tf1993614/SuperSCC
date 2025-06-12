@@ -9,7 +9,7 @@ SuperSCC: Super Single Cell clustering
 
 SuperSCC (Super single cell clustering), a novel computational framework that enhances scRNA-seq analysis by enabling hierarchical clustering, marker gene detection, and robust label transfer across multiple datasets without the need for batch correction. SuperSCC performs iterative clustering, gene module detection, and cluster merging to construct cell type hierarchies and gene modules at multiple levels.
 
-.. image:: _static/supp_fig2.png
+.. image:: _static/workflow.png
    :align: center
    :width: 700
    :alt: SuperSCC overview
