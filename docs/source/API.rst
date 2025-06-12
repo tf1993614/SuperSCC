@@ -58,8 +58,12 @@ Retrival augment generation
   :toctree: generated
 
   rag.SimpleRAG
+  rag.SimpleRAG.run_rag
+  rag.SimpleRAG.get_answer
+  rag.SimpleRAG.update_rag_chain
+  
   rag.ConnectRAG
-   
+  rag.ConnectRAG.connect_client
  
 
 

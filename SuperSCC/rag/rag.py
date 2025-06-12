@@ -55,6 +55,18 @@ class TranslateQuery(BaseModel):
 
 
 class SimpleRAG:
+    """
+    A class that encapsulates a complete Retrieval-Augmented Generation (RAG) pipeline, from data loading and processing to answer generation and citation
+
+    Parameters
+    -----------
+    file_path (str): 
+        The path to the file or the root directory containing the documents to be processed.
+    file_type (str): 
+        The file extension to look for (e.g., "pdf", "csv"). This determines which files are loaded.
+    """
+
+
     def __init__(self, file_path: str, file_type: str):
         self.file_path = file_path
         self.file_type = file_type
@@ -223,6 +235,26 @@ class SimpleRAG:
         return rag_chain
     
     def update_rag_chain(self, model = None, api_key = None, base_url = None, prompt = None, update_similarity_search = False, search_kwargs = {"k": 10}):
+        """
+        Updates components of the existing RAG chain, such as the LLM or prompt.
+
+        Parameters
+        ----------
+        model (str, optional): 
+            The name of a new LLM to use. If None, the current model is retained. Defaults to None.
+        api_key (str, optional): 
+            A new API key for the LLM. Defaults to None.
+        base_url (str, optional): 
+            A new base URL for the LLM. Defaults to None.
+        prompt (ChatPromptTemplate, optional): 
+            A new prompt template to use. Defaults to None.
+        update_similarity_search (bool, optional): 
+            If True, the entire RAG chain, including the retriever, is rebuilt. If False, only the LLM and prompt components are updated. Defaults to False.
+        search_kwargs (dict, optional): 
+            New search arguments for the retriever, effective only if update_similarity_search is True. Defaults to {"k": 10}
+        """
+        
+        
         if update_similarity_search is False:
             
             if prompt == None:
@@ -355,6 +387,45 @@ class SimpleRAG:
                 qdrant_search_kwargs = {"k": 10},
                 vectors_config = VectorParams(size = 1024, distance=Distance.COSINE)
                 ):
+        
+        """
+        Executes the entire RAG pipeline from scratch: loading, splitting, encoding, and creating the chain.
+
+        Parameters
+        ----------
+        qdrant_location (str): 
+            The location for the Qdrant client.
+        text_embedding_model (str): 
+            The name/path of the Hugging Face embedding model.
+        llm_model (str): 
+            The name of the ChatOpenAI model for generation.
+        llm_api_key (str): 
+            The API key for the LLM service.
+        llm_base_url (str): 
+            The base URL for the LLM API endpoint.
+        qdrant_host (str, optional): 
+            The hostname of the Qdrant server. Defaults to None.
+        qdrant_api_key (str, optional): 
+            The API key for Qdrant. Defaults to None.
+        qdrant_url (str, optional): 
+            The URL of the Qdrant server. Defaults to None.
+        metadata_columns (List[str], optional): 
+            Column names to use as metadata when loading CSV files. Defaults to None.
+        chunk_size (int, optional): 
+            Chunk size for text splitting. Defaults to 1000.
+        chunk_overlap (int, optional): 
+            Chunk overlap for text splitting. Defaults to 200.
+        text_model_kwargs (dict, optional): 
+            Keyword arguments for the embedding model. Defaults to {"device": "cpu"}.
+        text_encode_kwargs (dict, optional): 
+            Keyword arguments for the encoding process. Defaults to {"normalize_embeddings": True}.
+        qdrant_collection_name (str, optional): 
+            The name for the Qdrant collection. Defaults to "SimpleRAG".
+        qdrant_search_kwargs (dict, optional): 
+            Keyword arguments for the retriever's search. Defaults to {"k": 10}.
+        vectors_config (VectorParams, optional): 
+            Configuration for the vectors in Qdrant. Defaults to VectorParams(size=1024, distance=Distance.COSINE).
+        """
         
         if self.recursive_search_cond:
             self.recursive_search(self.file_path)
@@ -596,6 +667,31 @@ class SimpleRAG:
          return summary_res
     
     def get_answer(self, gene_list, query = None, hierarchy_search = True, hybrid_search = True, rerank_model = None, auto_translate = True, auto_refine_query = True, highlight_docs = True, score_docs = True):
+        """
+        The main entry point for asking a question. It orchestrates the entire process: query refinement, retrieval, reranking, scoring, and generation.
+        
+        Parameters
+        ----------
+        gene_list (str): 
+            A string containing a list of genes, which forms the primary basis of the query.
+        query (str, optional): 
+            A specific user-provided question. If None, a default query template is generated based on the gene_list. Defaults to None.
+        hierarchy_search (bool, optional): 
+            Enables filtered, hierarchical search within the hybrid search step. Defaults to True.
+        hybrid_search (bool, optional): 
+            If True, uses a hybrid retriever (BM25 + dense). If False, uses only the dense retriever. Defaults to True.
+        rerank_model (str, optional): 
+            The model for reranking. Note: This parameter is defined but not directly used in the method's logic; self.rerank() is called without passing this argument. Defaults to None.
+        auto_translate (bool, optional): 
+            If True, automatically translates the query from Chinese to English if needed. Defaults to True.
+        auto_refine_query (bool, optional): 
+            If True, automatically rewrites the query to improve retrieval performance. Defaults to True.
+        highlight_docs (bool, optional): 
+            If True, post-processes the answer to extract the exact source segments used. Defaults to True.
+        score_docs (bool, optional): 
+            If True, filters retrieved documents for relevance using an LLM-based scorer after reranking. Defaults to True
+        """
+        
         set_llm_cache(InMemoryCache())
         if query == None:
             self.query = f""" What cell type does the provided gene list suggest? \n\n gene list: {gene_list}:
@@ -702,7 +798,18 @@ class SimpleRAG:
     
 
 class ConnectRAG(SimpleRAG):
+    """
+    Establishes a connection to the Qdrant vector store using the provided details.
 
+    Parameters
+    ----------
+    model_kwargs (dict, optional): 
+        Keyword arguments for loading the Hugging Face embedding model. Defaults to {"device": "cpu"}.
+    encode_kwargs (dict, optional): 
+        Keyword arguments for the embedding model's encoding process. Defaults to {"normalize_embeddings": True}.
+    timeout (int, optional): 
+        The request timeout in seconds for the Qdrant client. Defaults to 1000.
+    """
     def __init__(self, host, api_key, location, url, collection_name, embedding_model):
         super().__init__(file_path="", file_type="")
         self.qdrant_host = host
@@ -724,6 +831,18 @@ class ConnectRAG(SimpleRAG):
         return info
 
     def connect_client(self, model_kwargs = {"device": "cpu"}, encode_kwargs = {"normalize_embeddings": True}, timeout = 1000):
+        """
+        Establishes a connection to the Qdrant vector store using the provided details.
+
+        Parameters
+        ----------
+        model_kwargs (dict, optional): 
+            Keyword arguments for loading the Hugging Face embedding model. Defaults to {"device": "cpu"}.
+        encode_kwargs (dict, optional): 
+            Keyword arguments for the embedding model's encoding process. Defaults to {"normalize_embeddings": True}.
+        timeout (int, optional): 
+            The request timeout in seconds for the Qdrant client. Defaults to 1000.
+        """
         client = QdrantClient(host = self.qdrant_host, api_key = self.__qdrant_api_key, timeout = timeout, url = self.qdrant_url, location = self.qdrant_location)
         model = HuggingFaceEmbeddings(model_name =  self.text_embedding_model, model_kwargs= model_kwargs, encode_kwargs=encode_kwargs)
         vector_store = QdrantVectorStore(client = client, collection_name = self.qdrant_collection_name, embedding = model)
@@ -735,4 +854,18 @@ class ConnectRAG(SimpleRAG):
                 llm_api_key,
                 llm_base_url,
                 qdrant_kwgars = {"k": 10}):
+        
+        """
+        Initializes the RAG chain using the established connection to the vector store.
+
+        Parameters:
+        llm_model (str): 
+            The name of the ChatOpenAI model for answer generation.
+        llm_api_key (str): 
+            The API key for the LLM service.
+        llm_base_url (str): 
+            The base URL for the LLM API endpoint.
+        qdrant_kwgars (dict, optional): 
+            Keyword arguments for the retriever's search function (e.g., {"k": 10}). Defaults to {"k": 10}.
+        """
         self.create_rag_chain(vector_store = self.vector_store, model = llm_model, api_key = llm_api_key, base_url = llm_base_url, search_kwargs = qdrant_kwgars)
