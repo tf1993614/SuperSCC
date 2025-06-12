@@ -31,6 +31,6 @@ SuperSCC (Super single cell clustering), a novel computational framework that en
    Tutorials/tutorial_label_transfer
    Tutorials/tutorial_clustering
    Tutorials/tutorial_gene_module  
-
+   Tutorials/tutorial_RAG
 
 
