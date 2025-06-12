@@ -50,7 +50,7 @@ Gene module
    SuperSCC.analyse_one_gene_module
 
 Retrival augment generation
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. module:: SuperSCC.rag
 .. currentmodule:: SuperSCC
 
@@ -64,6 +64,6 @@ Retrival augment generation
   
   rag.ConnectRAG
   rag.ConnectRAG.connect_client
- 
+  rag.ConnectRAG.run_rag 
 
 
