@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-from setuptools import setup, find_packages
 from pathlib import Path
 import sys
 
@@ -29,7 +28,7 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires=="3.11.7",
-    install_requires = ["dcor==0.6", 
+    install_requires=["dcor==0.6", 
                         "scanpy==1.10.1", 
                         "pandas==2.2.2", 
                         "numpy==1.26.4", 
