@@ -161,8 +161,6 @@ class SimpleRAG:
                     host = None,
                     api_key = None,
                     url = None,
-                    collection_name = "SimpleRAG",
-                    model_kwargs = {"device": "cpu"}, 
                     encode_kwargs = {"normalize_embeddings": True},
                     vectors_config = VectorParams(size = 1024, distance=Distance.COSINE),
                     timeout = 1000):
@@ -858,7 +856,8 @@ class ConnectRAG(SimpleRAG):
         """
         Initializes the RAG chain using the established connection to the vector store.
 
-        Parameters:
+        Parameters
+        ----------
         llm_model (str): 
             The name of the ChatOpenAI model for answer generation.
         llm_api_key (str): 
