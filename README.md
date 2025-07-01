@@ -36,3 +36,17 @@ After installing correctly, you can load SuperSCC::
 For how to use SuperSCC, please read the [SuperSCC's documentation](https://superscc.readthedocs.io/en/latest/index.html).
 
 ## Citation
+
+	@article {Tang2025.03.12.642774,
+	author = {Tang, Feng and Zhang, Zhongmin and Zhou, Weige and Li, Guangpeng and Tian, Luyi},
+	title = {Unveiling Gene Modules at Atlas Scale through Hierarchical Clustering of Single-Cell Data},
+	elocation-id = {2025.03.12.642774},
+	year = {2025},
+	doi = {10.1101/2025.03.12.642774},
+	publisher = {Cold Spring Harbor Laboratory},
+	abstract = {A major challenge in scRNAseq analysis is how to recover the biologically meaningful cell ontology tree and conserved gene modules across datasets. Data integration and batch-effect correction have been the key to effectively analyze multiple datasets, but often fail to disentangle cell states in heterogeneous samples, such as in cancer and the immune system. Here we present super single cell clustering (SuperSCC), a novel algorithm that utilizes machine-learning models to discover cell identities and gene modules from multiple datasets without the need of data integration. Of note, SuperSCC can be implemented both in cell lineage and cell state level, thereby building the hierarchy of cell programs with specific cell identity and gene modules. Such information has the great potential to identify the shared rare populations across datasets regardless of batch effect and benefits label transfer for mapping cell labels from reference to query. We used SuperSCC to perform atlas level data analysis on more than 90 datasets and build a cell state map of complex tissue in healthy and diseased stages, such as human lung. We show that SuperSCC outperforms existing approaches in identifying cellular context, has better annotation accuracy, and outlines gene modules that indicate conserved immune cell status in lung microenvironments.Competing Interest StatementThe authors have declared no competing interest.},
+	URL = {https://www.biorxiv.org/content/early/2025/03/14/2025.03.12.642774},
+	eprint = {https://www.biorxiv.org/content/early/2025/03/14/2025.03.12.642774.full.pdf},
+	journal = {bioRxiv}
+}
+
