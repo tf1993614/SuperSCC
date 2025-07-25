@@ -161,6 +161,8 @@ class SimpleRAG:
                     host = None,
                     api_key = None,
                     url = None,
+                    collection_name = "SuperSCC_RAG",
+                    model_kwargs = {"device": "cpu"},
                     encode_kwargs = {"normalize_embeddings": True},
                     vectors_config = VectorParams(size = 1024, distance=Distance.COSINE),
                     timeout = 1000):
