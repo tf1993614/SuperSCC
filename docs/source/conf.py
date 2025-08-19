@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.abspath("_ext"))
 
 os.environ['RPY2_CFFI_MODE'] = 'ABI'
 
-import SuperSCC # noqa: E402
+import test2.SuperSCC as SuperSCC # noqa: E402
 
 # -- Project information -----------------------------------------------------
 
