@@ -9,7 +9,7 @@ import textwrap
 from dotenv import load_dotenv
 from typing import List
 
-from SuperSCC import list_files, jaccard_score
+from ..utils import list_files, jaccard_score
 
 
 from langchain_qdrant import QdrantVectorStore

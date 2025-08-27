@@ -1,5 +1,5 @@
 # %%
-from rag import *
+from SuperSCC.rag import *
 import streamlit as st
 
 # --- Page Configuration ---
