@@ -5,7 +5,7 @@ API
 
 Import SuperSCC as::
         
-        import SuperSCC as scc
+        import SuperSCC
 
 Feature selection
 ~~~~~~~~~~~~~~~~~~
@@ -14,9 +14,9 @@ Feature selection
 .. autosummary::
   :toctree: generated
 
-  SuperSCC.feature_selection
-  SuperSCC.find_signature_genes
-  SuperSCC.find_markers_ovr
+  SuperSCC.feature_selection.feature_selection
+  SuperSCC.feature_selection.find_signature_genes
+  SuperSCC.feature_selection.find_markers_ovr
 
 Clustering
 ~~~~~~~~~~~~~~~~~~
@@ -25,8 +25,8 @@ Clustering
 .. autosummary::
    :toctree: generated
 
-   SuperSCC.global_consensus_cluster
-   SuperSCC.sub_consensus_cluster
+   SuperSCC.clustering.global_consensus_cluster
+   SuperSCC.clustering.sub_consensus_cluster
 
 Label transfer
 ~~~~~~~~~~~~~~~~~
@@ -35,8 +35,8 @@ Label transfer
 .. autosummary::
    :toctree: generated
 
-   SuperSCC.model_training
-   SuperSCC.predict_label
+   SuperSCC.label_transfer.model_training
+   SuperSCC.label_transfer.predict_label
 
 Gene module
 ~~~~~~~~~~~~~~~~~
@@ -45,25 +45,24 @@ Gene module
 .. autosummary::
    :toctree: generated
 
-   SuperSCC.get_gene_module
-   SuperSCC.compare_gene_modules
-   SuperSCC.analyse_one_gene_module
+   SuperSCC.gene_module.get_gene_module
+   SuperSCC.gene_module.compare_gene_modules
+   SuperSCC.gene_module.analyse_one_gene_module
 
 Retrival augment generation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. module:: SuperSCC.rag
 .. currentmodule:: SuperSCC
 
 .. autosummary::
   :toctree: generated
 
-  rag.SimpleRAG
-  rag.SimpleRAG.run_rag
-  rag.SimpleRAG.get_answer
-  rag.SimpleRAG.update_rag_chain
+  SuperSCC.rag.SimpleRAG
+  SuperSCC.rag.SimpleRAG.run_rag
+  SuperSCC.rag.SimpleRAG.get_answer
+  SuperSCC.rag.SimpleRAG.update_rag_chain
   
-  rag.ConnectRAG
-  rag.ConnectRAG.connect_client
-  rag.ConnectRAG.run_rag 
+  SuperSCC.rag.ConnectRAG
+  SuperSCC.rag.ConnectRAG.connect_client
+  SuperSCC.rag.ConnectRAG.run_rag 
 
 
