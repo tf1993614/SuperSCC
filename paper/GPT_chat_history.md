@@ -136,7 +136,3 @@ We performed pairwise Fisher’s exact tests to compare the overlap of vascular-
 **SuperSCC_gene_set** is the most representative of blood vessel-related functions, exhibiting the highest Relevant Gene Ratio and Biological Relevance Score. Statistical analysis confirms its significant enrichment in vascular-related genes compared to Seurat_wilcox. While Scanpy_t_test also shows strong relevance, the difference between it and SuperSCC is not statistically significant.
 
 ---
-user
-'CALCRL-AS1基因与内皮细胞直接的关系
-ChatGPT
-**CALCRL-AS1**（*Calcitonin Receptor-Like Receptor Antisense RNA 1*）是**CALCRL**基因的反义RNA（antisense RNA），目前关于它的研究还较为有限。但我们可以从两个方面来探索它与内皮细胞的潜在关系：
