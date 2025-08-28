@@ -13,7 +13,7 @@
 import os
 import sys
 # sys.path.insert(0, os.path.abspath('.'))
-os.environ['PATH'] = '/home/fengtang/anaconda3/envs/SuperSCC/lib/python3.11/site-packages/pandoc:' + os.environ['PATH']
+#os.environ['PATH'] = '/home/fengtang/anaconda3/envs/SuperSCC/lib/python3.11/site-packages/pandoc:' + os.environ['PATH']
 sys.path.insert(0, os.path.abspath("../SuperSCC/"))
 sys.path.insert(0, os.path.abspath("_ext"))
 
@@ -37,8 +37,7 @@ release = SuperSCC.__version__
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 master_doc = 'index' 
-extensions = [
-]
+#extensions = []
 
 needs_sphinx = "3.0"
 
@@ -55,8 +54,8 @@ extensions = [
     "IPython.sphinxext.ipython_console_highlighting",
     "sphinxext.opengraph",
     "nbsphinx",
-    # 'sphinx_copybutton',
-    #"edit_on_github",
+    'sphinx_copybutton',
+    "edit_on_github",
     ]
 
 # Napoleon settings
