@@ -54,7 +54,7 @@ extensions = [
     "IPython.sphinxext.ipython_console_highlighting",
     "sphinxext.opengraph",
     "nbsphinx",
-    'sphinx_copybutton',
+    #'sphinx_copybutton',
     'sphinx.ext.githubpages'
     #"edit_on_github",
     ]
