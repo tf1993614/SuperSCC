@@ -55,7 +55,8 @@ extensions = [
     "sphinxext.opengraph",
     "nbsphinx",
     'sphinx_copybutton',
-    "edit_on_github",
+    'sphinx.ext.githubpages'
+    #"edit_on_github",
     ]
 
 # Napoleon settings
@@ -91,6 +92,14 @@ exclude_patterns = ['_build']
 # html_theme = 'alabaster'
 # html_theme = 'sphinx_rtd_theme'
 html_theme = 'sphinx_rtd_theme'
+
+html_context = {
+    'display_github': True,
+    'github_user': 'tf1993614',
+    'github_repo': 'SuperSCC',
+    'github_version': 'main/docs/',
+}
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
