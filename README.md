@@ -24,7 +24,7 @@ After installing correctly, you can load SuperSCC
         import SuperSCC as scc
 
 
-# Bonus for R person
+## Bonus for R person
 Since the gene module-relevant functions was also written in R, you can also do the gene module analysis in R environment aftering installing [geneModule](https://github.com/tf1993614/SuperSCC/tree/main/geneModule) R package.
 	
         R
