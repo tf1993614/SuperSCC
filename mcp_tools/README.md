@@ -93,7 +93,7 @@ Once it's done, your Cline will show those mcp servers like:
 
 
 ## Example
-The example of our prompt serving as a high-level directive for the LLM to execute the necessary mcp servers shows below:
+The example of our prompt serving as a high-level directive for the LLM to execute the necessary mcp servers shows below and full running record can be found [**here**](https://github.com/tf1993614/SuperSCC/blob/main/mcp_tools/cline_full_record.md):
 
 ![img](https://github.com/tf1993614/SuperSCC/blob/main/mcp_tools/img/screenshot_3.gif)
 
