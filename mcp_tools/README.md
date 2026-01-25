@@ -1,6 +1,6 @@
 # MCP servers
 
-To facilitate obtaining the most robust LLM-based evaluation results via the scoring prompt template in our manuscript, we developed mcp servers for deterministic tasks such as [**ip mapping**](https://github.com/tf1993614/SuperSCC/blob/main/mcp_tools/id_mapping.py), [**intersection statistics calculation**](https://github.com/tf1993614/SuperSCC/blob/main/mcp_tools/calculate_intersection.py) and [**Fisher's exact test**](https://github.com/tf1993614/SuperSCC/blob/main/mcp_tools/fisher_test.py). 
+To facilitate obtaining the most robust LLM-based evaluation results via the scoring prompt template in our manuscript, we developed mcp servers for deterministic tasks such as [**id mapping**](https://github.com/tf1993614/SuperSCC/blob/main/mcp_tools/id_mapping.py), [**intersection statistics calculation**](https://github.com/tf1993614/SuperSCC/blob/main/mcp_tools/calculate_intersection.py) and [**Fisher's exact test**](https://github.com/tf1993614/SuperSCC/blob/main/mcp_tools/fisher_test.py). 
 
 To apply those mcp servers, you can follow the [**MCP official tutorial**](https://modelcontextprotocol.io/docs/develop/build-server#set-up-your-environment). 
 
@@ -96,3 +96,4 @@ Once it's done, your Cline will show those mcp servers like:
 The example of our prompt serving as a high-level directive for the LLM to execute the necessary mcp servers shows below:
 
 ![img](https://github.com/tf1993614/SuperSCC/blob/main/mcp_tools/img/screenshot_3.gif)
+
